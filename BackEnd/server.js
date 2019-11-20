@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb+srv://admin:hello@cluster0-lk0ot.mongodb.net/test?retryWrites=true&w=majority';
+//app.use(express.static(path.join(__dirname, '../build')));p.use('/static', express.static(path.join(__dirname, 'build//static')));
+
+const mongoDB = 'mongodb+srv://admin:admin@cluster0-l9eqk.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(mongoDB,{useNewUrlParser:true});
 
 app.use(cors());
@@ -33,7 +35,6 @@ const movieSchema = new Schema({
 })
 
 const MovieModel = mongoose.model('movie', movieSchema);
-
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
@@ -134,9 +135,12 @@ app.post('/api/movies', (req,res)=>{
 
     res.json('post recieved!');
 })
-app.get('/hello/:name', (req, res) => {
-    console.log(req.params.name);
-    res.send('Hello ' + req.params.name)
-})
+//app.get('/hello/:name', (req, res) => {
+//    console.log(req.params.name);
+//    res.send('Hello ' + req.params.name)
+//})
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
