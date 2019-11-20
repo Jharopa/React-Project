@@ -1,5 +1,5 @@
 import React from 'react'
-import Movies from './movies';
+import Movies from './guitars';
 import axios from 'axios';
 
 
