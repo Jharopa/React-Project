@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 //app.use(express.static(path.join(__dirname, '../build')));p.use('/static', express.static(path.join(__dirname, 'build//static')));
 
 const mongoDB = 'mongodb+srv://admin:admin@cluster0-l9eqk.mongodb.net/test?retryWrites=true&w=majority';
+
 mongoose.connect(mongoDB,{useNewUrlParser:true});
 
 app.use(cors());
@@ -35,19 +36,19 @@ const guitarSchema = new Schema({
     image:String
 })
 
-const MovieModel = mongoose.model('guitar', guitarSchema);
+const GuitarModel = mongoose.model('guitar', guitarSchema);
 
 app.get('/api/guitars', (req, res) => {
 
-    MovieModel.find((error, data) =>{
-        res.json({movies:data});
+    GuitarModel.find((error, data) =>{
+        res.json({guitars:data});
     })
 })
 
 app.get('/api/guitars/:id', (req, res)=>{
     console.log(req.params.id);
 
-    MovieModel.findById(req.params.id, (error,data)=>{
+    GuitarModel.findById(req.params.id, (error,data)=>{
         res.json(data);
     })
 })
@@ -55,7 +56,7 @@ app.get('/api/guitars/:id', (req, res)=>{
 app.delete('/api/guitars/:id', (req, res)=>{
     console.log(req.params.id);
 
-    MovieModel.deleteOne({_id: req.params.id},
+    GuitarModel.deleteOne({_id: req.params.id},
         (error, data) =>{
             res.json(data);
         })
@@ -65,7 +66,7 @@ app.put('/api/guitars/:id',(req,res)=>{
     console.log("Edit: "+req.params.id);
     console.log(req.body);
     
-    MovieModel.findByIdAndUpdate(req.params.id,
+    GuitarModel.findByIdAndUpdate(req.params.id,
         req.body,
         {new:true},
         (error,data)=>{
@@ -76,21 +77,23 @@ app.put('/api/guitars/:id',(req,res)=>{
 app.get('/api/guitars/:id', (req,res)=>{
     console.log("GET: "+req.params.id);
 
-    MovieModel.findById(req.params.id,(error, data)=>{
+    GuitarModel.findById(req.params.id,(error, data)=>{
         res.json(data);
     })
 })
 
 app.post('/api/guitars', (req,res)=>{
     console.log('Post request Successful');
-    console.log(req.body.title);
+    console.log(req.body.make);
+    console.log(req.body.model);
     console.log(req.body.year);
-    console.log(req.body.poster);
+    console.log(req.body.image);
 
-    MovieModel.create({
-        title:req.body.title, 
-        year:req.body.year, 
-        poster:req.body.poster
+    GuitarModel.create({
+        make:req.body.make, 
+        model:req.body.model, 
+        year:req.body.year,
+        image:req.body.image
     });
 
     res.json('post recieved!');
@@ -99,4 +102,4 @@ app.post('/api/guitars', (req,res)=>{
 //app.get('*', (req,res) =>{
 //    res.sendFile(path.join(__dirname+'/../build/index.html'));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Guitar Database App listening on port ${port}!`))

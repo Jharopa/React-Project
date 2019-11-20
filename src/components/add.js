@@ -6,85 +6,103 @@ class Add extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {Title:'',
+    this.state = {Make:'',
+                  Model:'',
                   Year:'',
-                Poster:''};
+                  Image:''};
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleMovieTitleChange = this.handleMovieTitleChange.bind(this);
-    this.handleMovieYearChange = this.handleMovieYearChange.bind(this);
-    this.handleMoviePosterChange = this.handleMoviePosterChange.bind(this);
+    this.handleGuitarMakeChange = this.handleGuitarMakeChange.bind(this);
+    this.handleGuitarModelChange = this.handleGuitarModelChange.bind(this);
+    this.handleGuitarYearChange = this.handleGuitarYearChange.bind(this);
+    this.handleGuitarImageChange = this.handleGuitarImageChange.bind(this);
   }
   
-  handleMovieTitleChange(e){
-    this.setState({Title: e.target.value});
+  handleGuitarMakeChange(e){
+    this.setState({Make: e.target.value});
   }
 
-  handleMovieYearChange(e){
+  handleGuitarModelChange(e){
+    this.setState({Model: e.target.value});
+  }
+
+  handleGuitarYearChange(e){
     this.setState({Year: e.target.value});
   }
 
-  handleMoviePosterChange(e){
-    this.setState({Poster: e.target.value});
+  handleGuitarImageChange(e){
+    this.setState({Image: e.target.value});
   }
 
   handleSubmit(e){
-    alert(this.state.Title+ "      " + this.state.Year 
-    +"       "+ this.state.Poster);
+    alert(this.state.Make+ "      " + this.state.Model 
+    +"       "+ this.state.Year +"       "+ this.state.Image);
     e.preventDefault();
     
     
-                const newMovie = {
-                  title: this.state.Title,
+                const newGuitar = {
+                  make: this.state.Make,
+                  model: this.state.Model,
                   year: this.state.Year,
-                  poster: this.state.Poster
+                  image: this.state.Image
                 };
-          axios.post('http://localhost:4000/api/movies',newMovie) 
+          axios.post('http://localhost:4000/api/guitars',newGuitar) 
           .then()
           .catch();
           
 
-          this.setState({Title:'',
+          this.setState({Make:'',
+                  Model:'',
                   Year:'',
-                Poster:''});    
+                  Image:''
+                });    
   }
 
   render() {
     return (
       <div>
-        <h1>Hello from Create component</h1>
-        <form onSubmit={this.handleSubmit}>
+        <h1 className="m-5">Add a Guitar</h1>
+        <form onSubmit={this.handleSubmit} className="mx-auto" style={{ width: '50rem' }}>
         <div className='form-group'>
-          <label>Movie Title</label>
+          <label>Guitar Brand</label>
           <input
           type='text'
           className='form-control'
-          value={this.state.Title}
-          onChange={this.handleMovieTitleChange}
+          value={this.state.Make}
+          onChange={this.handleGuitarMakeChange}
           ></input>
         </div>
         <div className='form-group'>
-          <label>Movie Year</label>
+          <label>Guitar Model</label>
+          <input
+          type='text'
+          className='form-control'
+          value={this.state.Model}
+          onChange={this.handleGuitarModelChange}
+          ></input>
+        </div>
+        <div className='form-group'>
+          <label>Guitar Year</label>
           <input
           type='text'
           className='form-control'
           value={this.state.Year}
-          onChange={this.handleMovieYearChange}
+          onChange={this.handleGuitarYearChange}
           ></input>
         </div>
         <div className='form-group'>
-          <label>Movie Poster Url</label>
+          <label>Guitar Image URL</label>
           <textarea
           row='3'
           className='form-control'
-          value={this.state.Poster}
-          onChange={this.handleMoviePosterChange}
+          value={this.state.Image}
+          onChange={this.handleGuitarImageChange}
           ></textarea>
         </div>
         <div>
           <input
           type="submit"
-          value="Add Movie">
+          value="Add Guitar">
           </input>
         </div>
         </form>
