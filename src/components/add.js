@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { newExpression } from '@babel/types';
 
-class Create extends React.Component {
+class Add extends React.Component {
   constructor(props){
     super(props);
 
@@ -93,4 +93,4 @@ class Create extends React.Component {
   }
 }
 
-export default Create;
+export default Add;

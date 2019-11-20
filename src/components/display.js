@@ -3,7 +3,7 @@ import Movies from './movies';
 import axios from 'axios';
 
 
-class Read extends React.Component{
+class Display extends React.Component{
 
     state = {
         movies: []
@@ -28,4 +28,4 @@ class Read extends React.Component{
         );
     }
 }
-export default Read;
+export default Display;
