@@ -33,7 +33,10 @@ const guitarSchema = new Schema({
     make:String,
     model:String,
     year:String,
-    image:String
+    image:String,
+    color:String,
+    material:String,
+    pickups:String
 })
 
 const GuitarModel = mongoose.model('guitar', guitarSchema);
@@ -88,12 +91,18 @@ app.post('/api/guitars', (req,res)=>{
     console.log(req.body.model);
     console.log(req.body.year);
     console.log(req.body.image);
+    console.log(req.body.color);
+    console.log(req.body.material);
+    console.log(req.body.pickups);
 
     GuitarModel.create({
         make:req.body.make, 
         model:req.body.model, 
         year:req.body.year,
-        image:req.body.image
+        image:req.body.image,
+        color:req.body.color,
+        material:req.body.material,
+        pickups:req.body.pickups
     });
 
     res.json('post recieved!');

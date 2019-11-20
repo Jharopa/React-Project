@@ -23,8 +23,8 @@ class Display extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="mt-5 mb-3">The Guitars</h1>
-                <CardDeck className="mx-auto my-5" style={{width: '66%'}}>
+                <h1 className="m-5">The Guitars</h1>
+                <CardDeck className="mx-auto my-5" style={{ width: '66%' }}>
                     <Guitars myGuitars={this.state.guitars}></Guitars>
                 </CardDeck>
             </div>
