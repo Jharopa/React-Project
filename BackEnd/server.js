@@ -6,11 +6,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-//app.use(express.static(path.join(__dirname, '../build')));p.use('/static', express.static(path.join(__dirname, 'build//static')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
 const mongoDB = 'mongodb+srv://admin:admin@cluster0-l9eqk.mongodb.net/test?retryWrites=true&w=majority';
 
-mongoose.connect(mongoDB,{useNewUrlParser:true});
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 app.use(cors());
 app.use(function (req, res, next) {
@@ -30,62 +30,62 @@ app.use(bodyParser.json())
 const Schema = mongoose.Schema;
 
 const guitarSchema = new Schema({
-    make:String,
-    model:String,
-    year:String,
-    image:String,
-    color:String,
-    material:String,
-    pickups:String
+    make: String,
+    model: String,
+    year: String,
+    image: String,
+    color: String,
+    material: String,
+    pickups: String
 })
 
 const GuitarModel = mongoose.model('guitar', guitarSchema);
 
 app.get('/api/guitars', (req, res) => {
 
-    GuitarModel.find((error, data) =>{
-        res.json({guitars:data});
+    GuitarModel.find((error, data) => {
+        res.json({ guitars: data });
     })
 })
 
-app.get('/api/guitars/:id', (req, res)=>{
+app.get('/api/guitars/:id', (req, res) => {
     console.log(req.params.id);
 
-    GuitarModel.findById(req.params.id, (error,data)=>{
+    GuitarModel.findById(req.params.id, (error, data) => {
         res.json(data);
     })
 })
 
-app.delete('/api/guitars/:id', (req, res)=>{
+app.delete('/api/guitars/:id', (req, res) => {
     console.log(req.params.id);
 
-    GuitarModel.deleteOne({_id: req.params.id},
-        (error, data) =>{
+    GuitarModel.deleteOne({ _id: req.params.id },
+        (error, data) => {
             res.json(data);
         })
 })
 
-app.put('/api/guitars/:id',(req,res)=>{
-    console.log("Edit: "+req.params.id);
+app.put('/api/guitars/:id', (req, res) => {
+    console.log("Edit: " + req.params.id);
     console.log(req.body);
-    
+
     GuitarModel.findByIdAndUpdate(req.params.id,
         req.body,
-        {new:true},
-        (error,data)=>{
+        { new: true },
+        (error, data) => {
             res.json(data);
         })
 })
 
-app.get('/api/guitars/:id', (req,res)=>{
-    console.log("GET: "+req.params.id);
+app.get('/api/guitars/:id', (req, res) => {
+    console.log("GET: " + req.params.id);
 
-    GuitarModel.findById(req.params.id,(error, data)=>{
+    GuitarModel.findById(req.params.id, (error, data) => {
         res.json(data);
     })
 })
 
-app.post('/api/guitars', (req,res)=>{
+app.post('/api/guitars', (req, res) => {
     console.log('Post request Successful');
     console.log(req.body.make);
     console.log(req.body.model);
@@ -96,19 +96,20 @@ app.post('/api/guitars', (req,res)=>{
     console.log(req.body.pickups);
 
     GuitarModel.create({
-        make:req.body.make, 
-        model:req.body.model, 
-        year:req.body.year,
-        image:req.body.image,
-        color:req.body.color,
-        material:req.body.material,
-        pickups:req.body.pickups
+        make: req.body.make,
+        model: req.body.model,
+        year: req.body.year,
+        image: req.body.image,
+        color: req.body.color,
+        material: req.body.material,
+        pickups: req.body.pickups
     });
 
     res.json('post recieved!');
 })
 
-//app.get('*', (req,res) =>{
-//    res.sendFile(path.join(__dirname+'/../build/index.html'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../build/index.html'));
+});
 
 app.listen(port, () => console.log(`Guitar Database App listening on port ${port}!`))
