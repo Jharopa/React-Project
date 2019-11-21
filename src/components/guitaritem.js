@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 
 class GuitarItem extends React.Component {
-
   constructor() {
     super();
     this.DeleteGuitar = this.DeleteGuitar.bind(this);

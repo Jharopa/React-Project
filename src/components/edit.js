@@ -24,9 +24,9 @@ class Edit extends React.Component {
     this.handleGuitarMaterialChange = this.handleGuitarMaterialChange.bind(this);
     this.handleGuitarPickupsChange = this.handleGuitarPickupsChange.bind(this);
   }
-  
+
   componentDidMount() {
-    alert(this.props.match.params.id);
+    console.log(this.props.match.params.id);
 
     axios.get('http://localhost:4000/api/guitars/' + this.props.match.params.id)
       .then((response) => {
@@ -36,12 +36,14 @@ class Edit extends React.Component {
           Model: response.data.model,
           Year: response.data.year,
           Image: response.data.image,
+          Color: response.data.color,
+          Material: response.data.material,
+          Pickups: response.data.pickups,
         })
       })
       .catch();
-
-
   }
+
   handleGuitarMakeChange(e) {
     this.setState({ Make: e.target.value });
   }
@@ -71,7 +73,7 @@ class Edit extends React.Component {
   }
 
   handleSubmit(e) {
-    alert(this.state.Make + "      " + this.state.Model
+    console.log(this.state.Make + "      " + this.state.Model
       + "       " + this.state.Year + "       " + this.state.Image
       + "       " + this.state.Color + "       " + this.state.Material
       + "       " + this.state.Pickups);
@@ -174,7 +176,7 @@ class Edit extends React.Component {
           <div>
             <input
               type="submit"
-              value="Add Guitar">
+              value="Edit Guitar">
             </input>
           </div>
         </form>

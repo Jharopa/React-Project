@@ -5,7 +5,6 @@ import CardDeck from 'react-bootstrap/CardDeck'
 
 
 class Display extends React.Component {
-
     state = {
         guitars: []
     };
@@ -23,7 +22,7 @@ class Display extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="m-5">The Guitars</h1>
+                <h1 className="m-5">Guitar Catalog</h1>
                 <CardDeck className="mx-auto my-5" style={{ width: '66%' }}>
                     <Guitars myGuitars={this.state.guitars}></Guitars>
                 </CardDeck>
