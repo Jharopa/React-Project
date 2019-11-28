@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # Data Rep Project
 
 Guitar Catalog that allows you to add which are saved to a database and are loaded from the database to be viewed in general or in detail:
